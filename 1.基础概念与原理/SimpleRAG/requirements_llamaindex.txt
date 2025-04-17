@@ -41,6 +41,7 @@ idna==3.10
 ipykernel==6.29.5
 ipython==9.1.0
 ipython_pygments_lexers==1.1.1
+ipywidgets==8.1.6
 isoduration==20.11.0
 jedi==0.19.2
 Jinja2==3.1.6
@@ -50,6 +51,8 @@ json5==0.12.0
 jsonpointer==3.0.0
 jsonschema==4.23.0
 jsonschema-specifications==2024.10.1
+jupyter==1.1.1
+jupyter-console==6.6.3
 jupyter-events==0.12.0
 jupyter-lsp==2.2.5
 jupyter_client==8.6.3
@@ -59,6 +62,7 @@ jupyter_server_terminals==0.5.3
 jupyterlab==4.4.0
 jupyterlab_pygments==0.3.0
 jupyterlab_server==2.27.3
+jupyterlab_widgets==3.0.14
 llama-cloud==0.1.15
 llama-cloud-services==0.6.6
 llama-index==0.12.25
@@ -175,5 +179,6 @@ wcwidth==0.2.13
 webcolors==24.11.1
 webencodings==0.5.1
 websocket-client==1.8.0
+widgetsnbextension==4.0.14
 wrapt==1.17.2
 yarl==1.18.3
