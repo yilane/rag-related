@@ -3,6 +3,7 @@ LangChain RAG智能问答系统 - DeepSeek版本
 使用传统的LangChain链式调用实现检索增强生成(RAG)
 包含文档加载、向量化、检索、生成等完整流程
 """
+# 第一步：索引阶段
 
 # 1. 加载文档
 # 导入必要的模块和环境变量配置
@@ -19,8 +20,8 @@ from langchain_community.document_loaders import WebBaseLoader
 loader = WebBaseLoader(web_paths=("https://zh.wikipedia.org/wiki/深度求索",))  # 深度求索的维基百科页面
 docs = loader.load()  # 执行加载操作，返回Document对象列表
 
-# 2. 文档分块
-# 导入递归字符文本分割器，用于将长文档切分成小块
+# 2. 文本分块
+# 导入递归字符文本分割器，用于将长文本切分成小块
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 # 创建文本分割器实例
@@ -28,10 +29,10 @@ text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=1000,  # 每个文本块的最大字符数（平衡内容完整性和处理效率）
     chunk_overlap=200,  # 相邻文本块之间的重叠字符数（确保信息不丢失）
 )
-# 将加载的文档分割成多个小块，便于向量化和检索
+# 将加载的文本分割成多个小块，便于向量化和检索
 all_splits = text_splitter.split_documents(docs)
 
-# 3. 设置嵌入模型
+# 3. 信息嵌入
 # 导入HuggingFace嵌入模型接口
 from langchain_huggingface import HuggingFaceEmbeddings
 
@@ -45,7 +46,7 @@ embeddings = HuggingFaceEmbeddings(
     encode_kwargs={"normalize_embeddings": True},  # 启用向量归一化，提升相似度计算准确性
 )
 
-# 4. 创建向量存储
+# 4. 向量存储
 # 导入内存向量存储，用于存储和检索文档向量
 from langchain_core.vectorstores import InMemoryVectorStore
 
@@ -54,6 +55,8 @@ vector_store = InMemoryVectorStore(embeddings)
 # 将分割后的文档添加到向量存储中
 # 这一步会将所有文档块转换为向量并存储在内存中，用于后续的相似性搜索
 vector_store.add_documents(all_splits)
+
+# 第二步：检索阶段
 
 # 5. 构建用户查询
 # 定义要询问的问题（这里可以改为动态输入）
@@ -81,6 +84,8 @@ prompt = ChatPromptTemplate.from_template(
 回答:"""
 )
 
+# 第三步：生成阶段
+
 # 8. 使用大语言模型生成答案
 # 导入DeepSeek聊天模型
 from langchain_deepseek import ChatDeepSeek  # 需要安装: pip install langchain-deepseek
@@ -97,7 +102,7 @@ llm = ChatDeepSeek(
 formatted_prompt = prompt.format(question=question, context=docs_content)
 answer = llm.invoke(formatted_prompt)
 
-# 9. 格式化输出答案
+# 格式化输出答案
 print("=" * 80)
 print("🤖 LangChain RAG 智能问答系统 (DeepSeek版本)")
 print("=" * 80)

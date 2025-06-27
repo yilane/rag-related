@@ -18,7 +18,7 @@ loader = WebBaseLoader(
 )
 docs = loader.load()  # 执行加载，返回Document对象列表
 
-# 2. 文档分块
+# 2. 文本分块
 # 将长文档切分成较小的chunk，便于向量化和检索
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
@@ -28,7 +28,7 @@ text_splitter = RecursiveCharacterTextSplitter(
 )
 all_splits = text_splitter.split_documents(docs)  # 将文档分割成多个chunk
 
-# 3. 设置嵌入模型
+# 3. 信息嵌入
 # 使用HuggingFace的中文嵌入模型将文本转换为向量表示
 from langchain_huggingface import HuggingFaceEmbeddings
 
@@ -38,7 +38,7 @@ embeddings = HuggingFaceEmbeddings(
     encode_kwargs={'normalize_embeddings': True}       # 对嵌入向量进行归一化处理
 )
 
-# 4. 创建向量存储
+# 4. 向量存储
 # 使用内存向量存储来存储和检索文档向量
 from langchain_core.vectorstores import InMemoryVectorStore
 
@@ -133,7 +133,7 @@ graph = (
 question = "DeepSeek有哪些核心技术？"      # 定义要查询的问题
 response = graph.invoke({"question": question})  # 调用图执行器，传入初始状态
 
-# 11. 格式化输出结果
+# 格式化输出结果
 print("=" * 80)
 print("🤖 LangGraph RAG 智能问答系统")
 print("=" * 80)
