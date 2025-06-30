@@ -3,26 +3,29 @@
 ## 目录
 
 ### 1. **简介**
-* [1.1 什么是RAG?](https://mp.weixin.qq.com/s/GallvMdJRYSEYhad5wPwvQ)
+- [1.1 什么是RAG?](https://mp.weixin.qq.com/s/GallvMdJRYSEYhad5wPwvQ)
   
 ### 2. **初识RAG应用开发**
-* [2.1 RAG开发环境准备](RAG开发环境准备.md)
-* [2.2 开发简单RAG应用](src/simple-rag)
-* [2.3 自己动手制作RAG框架](https://github.com/yilane/ragdev-project)
+- [2.1 RAG开发环境准备](RAG开发环境准备.md)
+- [2.2 开发简单RAG应用](src/simple-rag)
+- [2.3 自己动手制作RAG框架](https://github.com/yilane/ragdev-project)
   
 ### 3. **RAG核心组件**
-* 3.1 数据导入
 
-* 3.2 文本分块
+#### 3.1 索引阶段
+ - 3.1.1 [文档解析]()
+ - 3.1.2 [文本分块]()
+ - 3.1.3 [信息嵌入]()
+ - 3.1.4 [向量存储]()
 
-* 3.3 数据嵌入与索引
+#### 3.2 检索阶段
+ - 3.2.1 [预检索优化]()
+ - 3.2.2 [索引优化]()
+ - 3.2.3 [后检索优化]()
 
-* 3.4 预检索优化
-  
-* 3.5 后检索优化
-  
-* 3.6 响应生成
-  
+#### 3.3 生成阶段
+ - 3.3.1 [响应生成]()
+
 ### 4. RAG系统评估
 * 4.1 评估方法
 
