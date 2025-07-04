@@ -3,7 +3,7 @@
 ## 目录
 
 ### 1. **什么是RAG？**
-- 1.1 [RAG技术：让AI更聪明的"搜索+思考"组合拳](https://mp.weixin.qq.com/s/GallvMdJRYSEYhad5wPwvQ)
+- 1.1 [给AI装个“超级大脑”！5分钟带你搞懂RAG，原来这么简单！](https://mp.weixin.qq.com/s/nAEEkEvrb-WR_MzvuuvYXQ)
   
 ### 2. **初识RAG应用开发**
 - 2.1 [RAG开发环境准备](RAG开发环境准备.md)
@@ -27,11 +27,8 @@
  - 3.3.1 响应生成
 
 ### 4. RAG系统评估
-
-#### 4.1 评估方法
-
-#### 4.2 评估框架
+...
 
 ### 5. 高级RAG
-- 5.1 GraphRAG
+...
 
