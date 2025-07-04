@@ -6,7 +6,7 @@ import argparse
 
 # 保证可以跨目录导入utils工具函数
 sys.path.append(str(Path(__file__).resolve().parent.parent))
-from docling.document_converter import DocumentConverter, PdfFormatOption
+from docling.document_converter import DocumentConverter, PdfFormatOption #pip install docling
 from docling.datamodel.pipeline_options import (
     PdfPipelineOptions,
     AcceleratorOptions,

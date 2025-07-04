@@ -9,6 +9,15 @@ import glob
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 from utils.file_utils import ensure_output_dir
 
+"""
+安装 MinerU
+使用 pip 或 uv 安装
+```
+pip install --upgrade pip -i https://mirrors.aliyun.com/pypi/simple
+pip install uv -i https://mirrors.aliyun.com/pypi/simple
+uv pip install -U "mineru[core]" -i https://mirrors.aliyun.com/pypi/simple 
+``` 
+"""
 def convert_pdf_to_markdown(source_path, output_path, device="cpu"):
     """
     使用MinerU命令行工具将PDF文件转换为Markdown格式。

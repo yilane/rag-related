@@ -6,7 +6,7 @@ import argparse
 
 # 保证可以跨目录导入utils工具函数
 sys.path.append(str(Path(__file__).resolve().parent.parent))
-from langchain_pymupdf4llm import PyMuPDF4LLMLoader
+from langchain_pymupdf4llm import PyMuPDF4LLMLoader # pip install langchain_community langchain-pymupdf4llm
 from utils.file_utils import ensure_output_dir, get_output_filename
 
 
