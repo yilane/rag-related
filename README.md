@@ -7,7 +7,7 @@
   
 ### 2. **初识RAG应用开发**
 - 2.1 [RAG开发环境准备](RAG开发环境准备.md)
-- 2.2 [开发简单RAG应用](src/simple-rag)
+- 2.2 [开发简单RAG应用](src/00-simple-rag)
 - 2.3 [手工制作一个RAG框架](https://github.com/yilane/rag-framework)
 
 ### 3. **RAG核心流程**
