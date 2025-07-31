@@ -16,7 +16,7 @@
  - 3.1.1 [文档解析](src/01-rag-doc-parsing)
  - 3.1.2 [文本分块](src/02-rag-text-chunking)
  - 3.1.3 [信息嵌入](src/03-rag-embedding)
- - 3.1.4 向量存储
+ - 3.1.4 [向量存储](src/04-rag-vector-storage/)
 
 #### 3.2 检索阶段
  - 3.2.1 预检索优化
