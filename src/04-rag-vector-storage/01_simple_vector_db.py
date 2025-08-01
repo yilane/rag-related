@@ -1,61 +1,59 @@
-# 安装依赖
+# 需要安装的依赖包
 # pip install faiss-cpu sentence-transformers numpy
-
 import numpy as np
 import faiss
 from sentence_transformers import SentenceTransformer
-import json
-
 
 class SimpleVectorDB:
+
     def __init__(self):
         """
         初始化向量数据库
         """
-        # 存储原始文本，用于检索时返回
+        # 这个数组用来保存原始文本，检索时要返回给用户看
+        # 我刚开始忘了这步，结果只能返回向量，用户根本看不懂 
         self.texts = []
-        # 加载预训练的句子embedding模型
+        
+        # 加载预训练模型，这里用的是中文优化的BGE模型
+        # 选这个是因为对中文支持比较好，你也可以试试其他的
         self.model = SentenceTransformer("BAAI/bge-small-zh-v1.5")
+        
         # 获取模型的向量维度
         self.dimension = self.model.get_sentence_embedding_dimension()
+        
         # 创建Faiss索引 - 使用L2距离（欧几里得距离）
         self.index = faiss.IndexFlatL2(self.dimension)
 
-    def text_to_vector(self, text):
-        """
-        步骤1: 将文本转换为向量
-        """
-        # 使用预训练模型将文本编码为向量
-        vector = self.model.encode([text])
-        print(f"文本: '{text}'")
-        print(f"向量维度: {vector.shape}")
-        print(f"向量前10个值: {vector[0][:10]}")
-        print(f"向量数据类型: {vector.dtype}")
-        print("-" * 50)
-        return vector[0]
-
     def add_documents(self, documents):
         """
-        步骤2: 批量添加文档到向量数据库
+        步骤1: 批量将文本转换为向量，并添加到向量数据库
         """
-        print("=== 向量存储过程 ===")
+        print("=== 开始向量化 ===")
         vectors = []
 
         for i, doc in enumerate(documents):
-            print(f"处理文档 {i+1}:")
-            vector = self.text_to_vector(doc)
-            vectors.append(vector)
+            print(f"正在处理第 {i+1} 个文档（总共{len(documents)}个）:")
+            # 这一步就是把文字"翻译"成数字的过程
+            # 第一次看到一句话变成512个小数点，还挺震撼的
+            vector = self.model.encode([doc])
+            print(f"原文: '{doc}'")
+            print(f"向量维度: {vector.shape} - 一句话变成了{vector.shape[1]}个数字！")
+            print(f"向量前10个值: {vector[0][:10]} - 看起来很随机，但其实包含了语义信息")
+            print(f"向量数据类型: {vector.dtype}")
+            print("-" * 50)
+            vectors.append(vector[0])
             self.texts.append(doc)
 
         # 转换为numpy数组（Faiss要求的格式）
         vectors_array = np.array(vectors, dtype=np.float32)
         print(f"所有向量的形状: {vectors_array.shape}")
         print(f"向量矩阵大小: {vectors_array.nbytes} 字节")
-
-        # 添加到Faiss索引中
+		
+        """
+        步骤2 索引构建，添加到Faiss索引中
+        """
         self.index.add(vectors_array)
         print(f"索引中的向量数量: {self.index.ntotal}")
-
         return vectors_array
 
     def search(self, query, k=3):
@@ -66,9 +64,9 @@ class SimpleVectorDB:
         print(f"查询: '{query}'")
 
         # 将查询文本转换为向量
-        query_vector = self.text_to_vector(query)
+        query_vector = self.model.encode([query])[0]
         query_vector = query_vector.reshape(1, -1).astype(np.float32)
-
+        
         # 在索引中搜索最相似的k个向量
         distances, indices = self.index.search(query_vector, k)
 
@@ -129,20 +127,14 @@ def main():
 
     # 创建向量数据库
     vector_db = SimpleVectorDB()
-
     # 存储文档
     vectors = vector_db.add_documents(documents)
-
     # 显示存储详情
     vector_db.show_storage_details()
-
     # 执行检索
     queries = ["什么水果比较健康？", "编程相关的内容", "人工智能技术"]
-
     for query in queries:
-        results = vector_db.search(query, k=3)
-        print()
-
+        vector_db.search(query, k=3)
 
 if __name__ == "__main__":
     main()
