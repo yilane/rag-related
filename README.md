@@ -17,7 +17,7 @@
  - 3.1.2 [文本分块](src/02-rag-text-chunking)
  - 3.1.3 [信息嵌入](src/03-rag-embedding)
  - 3.1.4 [向量存储](src/04-rag-vector-storage/)
-
+ - 3.1.5 [实战：ICD-10 RAG检索项目Demo](src/04-rag-vector-storage/icd10-vectors-demo)
 #### 3.2 检索阶段
  - 3.2.1 预检索优化
  - 3.2.2 索引优化
