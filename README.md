@@ -22,6 +22,7 @@
  - 3.2.1 预检索优化
    - [查询翻译](src/05-pre-retrieval/01-query-translation)
    - [查询路由](src/05-pre-retrieval/02-query-routing)
+   - [查询构建](src/05-pre-retrieval/03-query-construction)
  - 3.2.2 索引优化
  - 3.2.3 后检索优化
 
